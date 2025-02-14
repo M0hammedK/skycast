@@ -29,7 +29,7 @@ section {
   @apply flex items-center justify-center p-2;
   max-width: 1200px;
   min-width: 380px;
-  width: 100%;
+  width: 50vw;
 }
 
 /* Ensure divs are flex-based for centering */

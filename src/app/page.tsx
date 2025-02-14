@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <section className="flex flex-col mt-5">
       <div>
-        <h1>
+        <h1 className="text-[1.5em]">
           welcome to our weather page
         </h1>
       </div>
