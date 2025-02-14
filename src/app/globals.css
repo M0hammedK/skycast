@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+/* Center everything on screen */
+html, body {
+  @apply items-center justify-center;
+  margin: 0;
+  padding: 0;
+}
+html{
+  height: 100%;
+  margin: 0;
+  
+}
+
+/* Center container and ensure responsive width */
+.my-container {
+  @apply flex flex-col items-center justify-self-center;
+  max-width: 1200px;
+  width: 90vw; /* Use viewport width */
+}
+
+/* Ensure section is centered and responsive */
+section {
+  @apply flex items-center justify-center p-2;
+  max-width: 1200px;
+  min-width: 380px;
+  width: 100%;
+}
+
+/* Ensure divs are flex-based for centering */
+div {
+  @apply flex items-center justify-center;
+}
+
+/* Typography */
+h1, h2 {
+  @apply text-3xl font-bold;
+}
+
+h3, h4 {
+  @apply text-xl font-semibold;
+}
+
+h5, h6, p {
+  @apply text-base;
+}
