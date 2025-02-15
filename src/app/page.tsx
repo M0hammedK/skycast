@@ -1,4 +1,5 @@
 import Table from "./components/Table";
+import {GetCurrentWeather} from '../server/Get'
 
 export default function Home() {
   
@@ -9,8 +10,11 @@ export default function Home() {
           welcome to our weather page
         </h1>
       </div>
+      <div>
+        <h1>{GetCurrentWeather()}</h1>
+      </div>
       <div className="mt-8 w-full">
-        <Table Heads={[[0,'name'], [1,'age'], [2,'country']]} Data={[[[0],['mohammed', 22, 'UK']],[[1],['ahmed', 25, 'USA']],[[2],['Ali', 30, 'FR']]]}/>
+        {/* <Table Heads={[[0,'name'], [1,'age'], [2,'country']]} Data={[[[0],['mohammed', 22, 'UK']],[[1],['ahmed', 25, 'USA']],[[2],['Ali', 30, 'FR']]]}/> */}
       </div>
     </section>
   )

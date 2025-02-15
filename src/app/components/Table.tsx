@@ -25,6 +25,3 @@ export default function Table({ Heads, Data }: Props) {
     </table>
   );
 }
-/*
-[[0, [mohammed, 22, uk]], [1, [mohammed, 22, uk]], [2, [mohammed, 22, uk]]]
-*/
