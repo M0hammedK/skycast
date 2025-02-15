@@ -1,69 +1,121 @@
 import axios from "axios";
+import WeatherSchema from "../models/Weather";
 
-export async function GetCurrentWeather(City: string = "Al Mukalla"): Promise<string> {
-  let name: string = "al-mukalla";
+export async function GetWeatherCurrent(
+  City: string = "Al Mukalla"
+): Promise<WeatherSchema> {
+  let weather: WeatherSchema = new WeatherSchema();
   const res = await axios
-    .get(`${process.env.NEXT_URL_WEATHER_SEREVER}//current.json`, {
+    .get(`${process.env.NEXT_URL_WEATHER_SEREVER}/current.json`, {
       method: "GET",
-      params: { key: `${process.env.WEATHER_SERVER_KEY}`, q: `${City}` },
+      params: {
+        key: `${process.env.WEATHER_SERVER_KEY}`,
+        q: `${City}`,
+        lang: "ar",
+      },
     })
     .then((res) => {
-      name = res.data["location"]["name"] as string;
-      console.log(res.data);
+      weather.name = res.data["location"]["name"];
+      weather.region = res.data["location"]["region"];
+      weather.country = res.data["location"]["country"];
+      weather.localtime = res.data["location"]["localtime"];
+      weather.lastUpdated = res.data["location"]["last_updated"];
+      weather.conditionText = res.data["current"]["condition"]["text"];
+      weather.conditionicon = res.data["current"]["condition"]["icon"];
+      weather.wendMPH = res.data["current"]["wend_mph"];
+      weather.cloud = res.data["current"]["cloud"];
+      weather.humidity = res.data["current"]["humidity"];
+      weather.heatIndexC = res.data["current"]["heatindex_c"];
+      weather.heatIndexF = res.data["current"]["heatindex_f"];
+      weather.feelsLikeC = res.data["current"]["feelslike_c"];
+      weather.feelsLikeF = res.data["current"]["feelslike_f"];
     })
     .catch((err: any) => {
       console.log(err);
     });
-  return name!;
+  return weather!;
 }
 
-/*
-whole data schema
-{
-  location: {
-    name: 'Al Mukalla',
-    region: 'Hadramawt',
-    country: 'Yemen',
-    lat: 14.53,
-    lon: 49.1314,
-    tz_id: 'Asia/Aden',
-    localtime_epoch: 1739613869,
-    localtime: '2025-02-15 13:04'
-  },
-  current: {
-    last_updated_epoch: 1739613600,
-    last_updated: '2025-02-15 13:00',
-    temp_c: 26,
-    temp_f: 78.8,
-    is_day: 1,
-    condition: {
-      text: 'Sunny',
-      icon: '//cdn.weatherapi.com/weather/64x64/day/113.png',
-      code: 1000
-    },
-    wind_mph: 9.4,
-    wind_kph: 15.1,
-    wind_degree: 122,
-    wind_dir: 'ESE',
-    pressure_mb: 1014,
-    pressure_in: 29.94,
-    precip_mm: 0,
-    precip_in: 0,
-    humidity: 51,
-    cloud: 0,
-    feelslike_c: 26.7,
-    feelslike_f: 80.1,
-    windchill_c: 26,
-    windchill_f: 78.8,
-    heatindex_c: 26.7,
-    heatindex_f: 80.1,
-    dewpoint_c: 15.1,
-    dewpoint_f: 59.2,
-    vis_km: 10,
-    vis_miles: 6,
-    uv: 9.1,
-    gust_mph: 10.8,
-    gust_kph: 17.4
-  }
+export async function GetWeatherForecast(
+  City: string = "Al Mukalla"
+): Promise<WeatherSchema> {
+  let weather: WeatherSchema = new WeatherSchema();
+  const res = await axios
+    .get(`${process.env.NEXT_URL_WEATHER_SEREVER}/forecast.json`, {
+      method: "GET",
+      params: {
+        key: `${process.env.WEATHER_SERVER_KEY}`,
+        q: `${City}`,
+        lang: "ar",
+      },
+    })
+    .then((res) => {
+      console.log(res.data['forecast']);
+      //   weather.name = res.data["location"]["name"];
+      //   weather.region = res.data["location"]["region"];
+      //   weather.country = res.data["location"]["country"];
+      //   weather.localtime = res.data["location"]["localtime"];
+      //   weather.lastUpdated = res.data["location"]["last_updated"];
+      //   weather.conditionText = res.data["current"]["condition"]["text"];
+      //   weather.conditionicon = res.data["current"]["condition"]["icon"];
+      //   weather.wendMPH = res.data["current"]["wend_mph"];
+      //   weather.cloud = res.data["current"]["cloud"];
+      //   weather.humidity = res.data["current"]["humidity"];
+      //   weather.heatIndexC = res.data["current"]["heatindex_c"];
+      //   weather.heatIndexF = res.data["current"]["heatindex_f"];
+      //   weather.feelsLikeC = res.data["current"]["feelslike_c"];
+      //   weather.feelsLikeF = res.data["current"]["feelslike_f"];
+    })
+    .catch((err: any) => {
+      console.log(err);
+    });
+  return weather!;
 }
-*/
+// {
+//     location: {
+//       name: 'Al Mukalla',
+//       region: 'Hadramawt',
+//       country: 'Yemen',
+//       lat: 14.53,
+//       lon: 49.1314,
+//       tz_id: 'Asia/Aden',
+//       localtime_epoch: 1739632288,
+//       localtime: '2025-02-15 18:11'
+//     },
+//     current: {
+//       last_updated_epoch: 1739631600,
+//       last_updated: '2025-02-15 18:00',
+//       temp_c: 22.8,
+//       temp_f: 73.1,
+//       is_day: 0,
+//       condition: {
+//         text: 'Clear',
+//         icon: '//cdn.weatherapi.com/weather/64x64/night/113.png',
+//         code: 1000
+//       },
+//       wind_mph: 4.3,
+//       wind_kph: 6.8,
+//       wind_degree: 89,
+//       wind_dir: 'E',
+//       pressure_mb: 1014,
+//       pressure_in: 29.95,
+//       precip_mm: 0,
+//       precip_in: 0,
+//       humidity: 67,
+//       cloud: 0,
+//       feelslike_c: 24.9,
+//       feelslike_f: 76.8,
+//       windchill_c: 22.8,
+//       windchill_f: 73.1,
+//       heatindex_c: 24.9,
+//       heatindex_f: 76.8,
+//       dewpoint_c: 16.4,
+//       dewpoint_f: 61.6,
+//       vis_km: 10,
+//       vis_miles: 6,
+//       uv: 0,
+//       gust_mph: 5.4,
+//       gust_kph: 8.7
+//     },
+//     forecast: { forecastday: [ [Object] ] }
+//   }
