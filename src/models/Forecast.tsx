@@ -1,8 +1,8 @@
+import ForecastHourSchema from "./ForecastHour";
 
 class ForecastSchema{
 public data: Date | undefined;
-public day: any | undefined;
 public astro: any | undefined;
-public hour: any | undefined;
+public hour: ForecastHourSchema | undefined;
 }
 export default ForecastSchema

@@ -1,19 +1,12 @@
 import ForecastSchema from "./Forecast";
+import WeatherDaySchema from "./WeatherDay";
 export default class WeatherSchema{
   public name: string | undefined;
   public region: string | undefined;
   public country: string | undefined;
   public localtime: Date | undefined;
   public lastUpdated: Date | undefined;
-  public conditionText: string | undefined;
-  public conditionicon: string | undefined;
-  public wendMPH: string | undefined;
-  public cloud: string | undefined;
-  public humidity: string | undefined;
-  public heatIndexC: string | undefined;
-  public heatIndexF: string | undefined;
-  public feelsLikeC: string | undefined;
-  public feelsLikeF: string | undefined;
+  public day: WeatherDaySchema | undefined;
   public forecat: ForecastSchema | undefined;
 }
 
