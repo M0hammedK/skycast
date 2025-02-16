@@ -1,5 +1,5 @@
 import ForecastSchema from "./Forecast";
-export default class WeatherSchema {
+export default class WeatherSchema{
   public name: string | undefined;
   public region: string | undefined;
   public country: string | undefined;

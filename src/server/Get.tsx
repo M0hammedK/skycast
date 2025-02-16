@@ -1,39 +1,23 @@
 import axios from "axios";
 import WeatherSchema from "../models/Weather";
 
-export async function GetWeatherCurrent(
-  City: string = "Al Mukalla"
-): Promise<WeatherSchema> {
-  let weather: WeatherSchema = new WeatherSchema();
-  const res = await axios
-    .get(`${process.env.NEXT_URL_WEATHER_SEREVER}/current.json`, {
-      method: "GET",
-      params: {
-        key: `${process.env.WEATHER_SERVER_KEY}`,
-        q: `${City}`,
-        lang: "ar",
-      },
-    })
-    .then((res) => {
-      weather.name = res.data["location"]["name"];
-      weather.region = res.data["location"]["region"];
-      weather.country = res.data["location"]["country"];
-      weather.localtime = res.data["location"]["localtime"];
-      weather.lastUpdated = res.data["location"]["last_updated"];
-      weather.conditionText = res.data["current"]["condition"]["text"];
-      weather.conditionicon = res.data["current"]["condition"]["icon"];
-      weather.wendMPH = res.data["current"]["wend_mph"];
-      weather.cloud = res.data["current"]["cloud"];
-      weather.humidity = res.data["current"]["humidity"];
-      weather.heatIndexC = res.data["current"]["heatindex_c"];
-      weather.heatIndexF = res.data["current"]["heatindex_f"];
-      weather.feelsLikeC = res.data["current"]["feelslike_c"];
-      weather.feelsLikeF = res.data["current"]["feelslike_f"];
-    })
-    .catch((err: any) => {
-      console.log(err);
-    });
-  return weather!;
+export async function GetWeatherCurrent(City: string): Promise<any> {
+  let data;
+  await axios
+  .get(`${process.env.NEXT_URL_API_URL}/current.json`, {
+    method: "GET",
+    params: {
+      key: `${process.env.WEATHER_SERVER_KEY}`,
+      q: `${City}`,
+    },
+  })
+  .then((res) => {
+    data = res.data;
+  })
+  .catch((err: any) => {
+    data = null
+  });
+  return data;
 }
 
 export async function GetWeatherForecast(
@@ -50,7 +34,7 @@ export async function GetWeatherForecast(
       },
     })
     .then((res) => {
-      console.log(res.data['forecast']);
+      console.log(res.data["forecast"]);
       //   weather.name = res.data["location"]["name"];
       //   weather.region = res.data["location"]["region"];
       //   weather.country = res.data["location"]["country"];
