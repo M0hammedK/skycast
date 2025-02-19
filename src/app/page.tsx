@@ -1,5 +1,4 @@
 import Table from "./components/Table";
-import WeatherSchema from "../models/Weather";
 import Panel from "./components/Panel";
 import { GetWeatherForecast } from "../server/Get";
 import ForecastSchema from "../models/Forecast";
