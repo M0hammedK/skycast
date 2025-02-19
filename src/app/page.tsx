@@ -1,10 +1,7 @@
 import Table from "./components/Table";
-import WeatherSchema from "../models/Weather";
 import Panel from "./components/Panel";
-import { GetWeatherForecast } from "../server/Get";
 
-export default async function Home() {
-  const res = await GetWeatherForecast()
+export default  function Home() {
   return (
     <section className="flex flex-col mt-5">
       <div>
