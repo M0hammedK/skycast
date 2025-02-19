@@ -3,7 +3,6 @@ import WeatherSchema from "../models/Weather";
 import Panel from "./components/Panel";
 import { GetWeatherForecast } from "../server/Get";
 import ForecastSchema from "../models/Forecast";
-import axios from "axios";
 
 export default async function Home() {
   return (

@@ -1,64 +1,96 @@
 "use client";
 
+import { useEffect, useState } from "react";
+import axios from "axios";
+import useEmblaCarousel from "embla-carousel-react";
+import { useDebounce } from "use-debounce";
+
+import { useCity } from "../CityContext";
 import ForecastSchema from "@/src/models/Forecast";
 import ForecastHourSchema from "@/src/models/ForecastHour";
-import WeatherSchema from "@/src/models/Weather";
-import WeatherDaySchema from "@/src/models/WeatherDay";
 import WeatherUtils from "@/src/utils/Weather";
-import axios from "axios";
-import { useEffect, useState } from "react";
 
 interface Props {
   Heads: string[];
 }
 
 export default function Table({ Heads }: Props) {
-  const [city, setCity] = useState<string>("al mukalla");
+  const { city } = useCity();             // no need for setCity if not used
   const [error, setError] = useState<string | null>(null);
   const [forecast, setForecast] = useState<ForecastSchema | null>(null);
+  // Debounce city to avoid multiple rapid requests
+  const [debouncedCity] = useDebounce(city, 1000);
+
+  // Embla Carousel
+  const [emblaRef, emblaApi] = useEmblaCarousel({
+    loop: false,
+    align: "start",
+    startIndex: 0,
+    skipSnaps: false,
+  });
 
   useEffect(() => {
+    // If city is empty, reset forecast and error
+    if (!debouncedCity) {
+      setForecast(null);
+      setError(null);
+      return;
+    }
+
+    // Fetch forecast data
     const fetchForecast = async () => {
       try {
-        await axios(`/api/forecast?city=${encodeURIComponent(city)}`)
-          .then((res) => {
-            if (!res.data) {
-              setError("there's no city called " + city);
-            }
-            const data: ForecastSchema = WeatherUtils.ForecastToModel(res);
-            setForecast(data)
-            setError(null);
-          })
-          .catch((err) => {
-            throw err;
-          });
-      } catch (error) {
-        setError("there's no city called " + city);
+        const res = await axios.get(`/api/forecast?city=${encodeURIComponent(debouncedCity)}`);
+        if (!res.data) {
+          setError(`No city found called "${debouncedCity}".`);
+          setForecast(null);
+          return;
+        }
+        const data: ForecastSchema = WeatherUtils.ForecastToModel(res);
+        setForecast(data);
+        setError(null);
+      } catch (err) {
+        setError(`No city found called "${debouncedCity}".`);
+        setForecast(null);
       }
     };
     fetchForecast();
-  }, [city]);
+  }, [debouncedCity]);
+
+  // Render Embla Carousel if forecast data is available
+  const renderCarousel = () => {
+    if (!forecast?.hour?.length) {
+      // Loading state
+      return (
+        <div className="w-full bg-blue-500 rounded-b-xl p-5">
+          <h1>Loading Forecast Data...</h1>
+        </div>
+      );
+    }
+
+    return (
+      <section className="h-[300px]">
+        <div className="embla" ref={emblaRef}>
+          <div className="embla__container">
+            {forecast.hour.map((data: ForecastHourSchema) => (
+              <div key={data.day?.lastUpdated} className="embla__slide">
+                <h1>{data.day?.lastUpdated}</h1>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  };
 
   return (
     <div>
       {error ? (
-        <div className="w-full bg-blue-500 rounded-xl p-5">
+        <div className="w-full bg-red-500 text-white rounded-xl p-5">
           <h1>{error}</h1>
         </div>
-      ) : forecast ? (
-        <table className="w-full border border-gray-300 text-left">
-          <tbody>
-            {forecast?.hour?.map((forecast: ForecastHourSchema) => (
-              <tr key={0} className="hover:bg-gray-100">
-                <td className="px-4 py-2 border-b">{forecast.day?.tempC}</td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
       ) : (
-        <div className="w-full bg-blue-500 rounded-b-xl p-5">
-          <h1>Loading Forecast Data...</h1>
-        </div>
+        renderCarousel()
       )}
     </div>
   );

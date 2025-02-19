@@ -13,11 +13,11 @@ export default class WeatherUtils {
     weatherDay.wendMPH = res["wend_mph"];
     weatherDay.cloud = res["cloud"];
     weatherDay.humidity = res["humidity"];
-    weatherDay.tempC = res["heatindex_c"] && res["temp_c"];
-    weatherDay.tempF = res["heatindex_f"] && res["temp_f"];
+    weatherDay.tempC = res["heatindex_c"] || res["temp_c"];
+    weatherDay.tempF = res["heatindex_f"] || res["temp_f"];
     weatherDay.feelsLikeC = res["feelslike_c"];
     weatherDay.feelsLikeF = res["feelslike_f"];
-
+    weatherDay.lastUpdated = res["last_updated"] || res["time"];
     return weatherDay;
   }
 
@@ -33,11 +33,12 @@ export default class WeatherUtils {
   }
 
   public static ForecastHourToModel(res: any): ForecastHourSchema[] {
-    const listForecastHour: ForecastHourSchema[] = [
-      res.map((data: any) => {
-        new ForecastHourSchema().day = this.WeatherDayToModel(data);
-      }),
-    ];
+    let listForecastHour: ForecastHourSchema[] = [];
+    res.map((data: any) => {
+      const forecastHour: ForecastHourSchema = new ForecastHourSchema();
+      forecastHour.day = this.WeatherDayToModel(data);
+      listForecastHour.push(forecastHour);
+    });
     return listForecastHour;
   }
 
@@ -52,7 +53,7 @@ export default class WeatherUtils {
     forecastAstro.sunSet = res["sunset"];
     return forecastAstro;
   }
-  
+
   public static ForecastToModel(res: AxiosResponse<any, any>): ForecastSchema {
     const forecast: ForecastSchema = new ForecastSchema();
     forecast.data = res.data["forecast"]["forecastday"]["0"]["date"];
@@ -62,6 +63,6 @@ export default class WeatherUtils {
     forecast.hour = this.ForecastHourToModel(
       res.data["forecast"]["forecastday"]["0"]["hour"]
     );
-    return forecast
+    return forecast;
   }
 }

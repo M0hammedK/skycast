@@ -1,27 +1,28 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Image from "next/image";
 import WeatherSchema from "@/src/models/Weather";
 import axios from "axios";
 import WeatherUtils from "@/src/utils/Weather";
 import { useDebounce } from "use-debounce";
+import { cityContaxt, useCity } from "../CityContext";
 
 export default function Panel() {
-  const [search, setSearch] = useState("al mukalla");
+  const {city, setCity} = useCity();
   const [error, setError] = useState<string | null>(null);
   const [weather, setWeather] = useState<WeatherSchema | null>(null);
-  const [debouncedSearch] = useDebounce(search, 1000);
+  const [debouncedSearch] = useDebounce(city, 1000);
 
   useEffect(() => {
     setError(null);
     const fetchWeather = async () => {
       if (!debouncedSearch) return;
       try {
-        await axios(`/api/weather?city=${encodeURIComponent(search)}`)
+        await axios(`/api/weather?city=${encodeURIComponent(city)}`)
           .then((res) => {
             if (!res.data) {
-              setError("there's no city called " + search);
+              setError("there's no city called " + city);
             }
             const data: WeatherSchema = WeatherUtils.WeatherToModel(res);
             setWeather(data);
@@ -31,7 +32,7 @@ export default function Panel() {
             throw err;
           });
       } catch (error) {
-        setError("there's no city called " + search);
+        setError("there's no city called " + city);
       }
     };
 
@@ -43,9 +44,9 @@ export default function Panel() {
         <input
           placeholder="Enter your city..."
           className="bg-transparent text-black w-full p-2 font-bold text-xl text-center"
-          value={search}
+          value={city}
           onChange={(e) => {
-            setSearch(e.target.value);
+            setCity(e.target.value);
           }}
         />
       </div>
@@ -54,7 +55,7 @@ export default function Panel() {
           <h1>{error}</h1>
         </div>
       ) : weather ? (
-        <div className="grid grid-cols-2 w-full bg-blue-500 rounded-b-xl contain-content">
+        <div className="grid grid-cols-[40%_60%] w-full bg-blue-500 rounded-b-xl contain-content">
           <div>
             <Image
               src={`http:${weather.day?.conditionicon}`}

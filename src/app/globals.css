@@ -49,3 +49,16 @@ h3, h4 {
 h5, h6, p {
   @apply text-base;
 }
+
+.embla {
+  overflow: hidden; 
+}
+
+.embla__container {
+  @apply flex
+}
+
+.embla__slide {
+  @apply relative min-w-[20vw] p-4 flex items-start justify-start bg-white mr-2 rounded-lg;
+
+}
