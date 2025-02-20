@@ -51,7 +51,7 @@ export default function Panel() {
         />
       </div>
       {error ? (
-        <div className="w-full bg-blue-500 rounded-b-xl p-5">
+        <div className="w-full bg-red-500 rounded-b-xl p-5">
           <h1>{error}</h1>
         </div>
       ) : weather ? (
@@ -76,7 +76,7 @@ export default function Panel() {
           </div>
         </div>
       ) : (
-        <div className="w-full bg-blue-500 rounded-b-xl p-4">
+        <div className="w-full bg-yellow-200 rounded-b-xl p-4">
           <h1>Loading Weather Data...</h1>
         </div>
       )}
