@@ -6,9 +6,9 @@ describe("Footer", () => {
   it("renders a heading", () => {
     render(<Footer />);
 
-    const heading = screen.getByRole("heading", {
-      name: /®All Right Recived/i,
-    });
+    const year = new Date().getFullYear();
+    const heading = screen.getByText(`© ${year} SkyCast. Created by Mohammed Alkaf & Hasan Al-Haddad`);
+    
 
     expect(heading).toBeInTheDocument();
   });
