@@ -102,13 +102,16 @@ export default function Table({ Heads }: Props) {
                   className="justify-items-center p-4"
                 >
                   <div className="bg shadow-lg p-2 backdrop-blur-lg rounded-lg">
-                    <Image
-                      src={`http://${data.day?.conditionicon!}`}
-                      alt="dojo"
-                      width={100}
-                      height={100}
-                      className="justify-self-end"
-                    ></Image>
+                    <div className="flex flex-col">
+                      <Image
+                        src={`http://${data.day?.conditionicon!}`}
+                        alt="dojo"
+                        width={100}
+                        height={100}
+                        className="justify-self-end"
+                      ></Image>
+                      <h4>{data.day?.lastUpdated?.split(" ")[1]}</h4>
+                    </div>
                     <div className="flex flex-col">
                       <h1>{data.day?.conditionText}</h1>
                       <h3>درجة الحرارة ℃{data.day?.tempC}</h3>
