@@ -1,17 +1,18 @@
 // app/components/Panel.tsx
 "use client";
 import Image from "next/image";
-import { useCity } from "../CityContext";
+import { useCity } from "../GlobalStates/CityContext";
 import { useEffect, useState } from "react";
 import { useDebounce } from "use-debounce";
 import WeatherSchema from "@/src/models/Weather";
 import axios from "axios";
 import WeatherUtils from "@/src/utils/Weather";
-import { CloudIcon } from "./CloudIcon";
-import { WindIcon } from "./WindIcon";
-import { HumidityIcon } from "./HumidityIcon";
-import { ThermometerIcon } from "./ThermometerIcon";
-import { SearchIcon } from "./SearchIcon";
+import { CloudIcon } from "../Icons/CloudIcon";
+import { WindIcon } from "../Icons/WindIcon";
+import { HumidityIcon } from "../Icons/HumidityIcon";
+import { ThermometerIcon } from "../Icons/ThermometerIcon";
+import { SearchIcon } from "../Icons/SearchIcon";
+import { stringify } from "querystring";
 
 export default function Panel() {
   const { city, setCity } = useCity();
@@ -65,6 +66,7 @@ export default function Panel() {
       ) : weather ? (
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-6">
           <div className="flex flex-col items-center">
+            <h1>{weather.localtime?.split(" ")[1]}</h1>
             <Image
               src={`http:${weather.day?.conditionicon}`}
               alt={weather.day?.conditionText || "Weather condition"}
@@ -72,13 +74,14 @@ export default function Panel() {
               height={120}
               className="drop-shadow"
             />
-            <p className="text-4xl font-bold mt-2">
-              {weather.day?.tempC}°C
-            </p>
-            <p className="text-gray-600">{weather.day?.conditionText}</p>
+            <h1 className="text-4xl font-bold mt-2">{weather.day?.tempC}°C</h1>
+            <h3 className="text-gray-600">{weather.day?.conditionText}</h3>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
+            <h1 className="col-span-2 text-center">
+              {weather.name}, {weather.country}
+            </h1>
             <WeatherDetail
               icon={<ThermometerIcon />}
               label="Feels like"
@@ -110,7 +113,11 @@ export default function Panel() {
   );
 }
 
-function WeatherDetail({ icon, label, value }: { 
+function WeatherDetail({
+  icon,
+  label,
+  value,
+}: {
   icon: React.ReactNode;
   label: string;
   value: string;
@@ -120,7 +127,9 @@ function WeatherDetail({ icon, label, value }: {
       <div className="text-blue-600">{icon}</div>
       <div>
         <p className="text-sm text-gray-600">{label}</p>
-        <p className="font-semibold">{value}</p>
+        <p className="font-semibold">
+          &nbsp; {value.split(" ")[0] !== "undefined" ? value : "NaN"}
+        </p>
       </div>
     </div>
   );

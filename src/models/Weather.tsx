@@ -4,8 +4,8 @@ export default class WeatherSchema{
   public name: string | undefined;
   public region: string | undefined;
   public country: string | undefined;
-  public localtime: Date | undefined;
-  public lastUpdated: Date | undefined;
+  public localtime: string | undefined;
+  public lastUpdated: string | undefined;
   public day: WeatherDaySchema | undefined;
   public forecat: ForecastSchema | undefined;
 }

@@ -1,13 +1,14 @@
 // app/layout.tsx
 import type { Metadata } from "next";
 import "./globals.css";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
-import CityProvider from "./CityContext";
+import Navbar from "./components/UI/Navbar";
+import Footer from "./components/UI/Footer";
+import CityProvider from "./components/GlobalStates/CityContext";
 
 export const metadata: Metadata = {
   title: "SkyCast - Weather Forecast",
-  description: "Real-time weather updates created by Mohammed Alkaf & Hasan Alhddad",
+  description:
+    "Real-time weather updates created by Mohammed Alkaf & Hasan Alhddad",
 };
 
 export default function RootLayout({

@@ -5,14 +5,14 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { useDebounce } from "use-debounce";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { useCity } from "../CityContext";
+import { useCity } from "../GlobalStates/CityContext";
 import ForecastSchema from "@/src/models/Forecast";
 import WeatherUtils from "@/src/utils/Weather";
 import { Mousewheel, Navigation } from "swiper/modules";
 import Image from "next/image";
 import "swiper/css";
 import "swiper/css/navigation";
-import { WindIcon } from "./WindIcon";
+import { WindIcon } from "../Icons/WindIcon";
 
 export default function Table() {
   const { city } = useCity(); // no need for setCity if not used
@@ -85,7 +85,8 @@ export default function Table() {
                 <p className="text-lg font-semibold">{hour.day?.tempC}°C</p>
                 <div className="flex items-center space-x-1 mt-1">
                   <WindIcon className="w-4 h-4 text-gray-500" />
-                  <span className="text-sm">{hour.day?.wendMPH} mph</span>
+                  {/* <span className="text-sm">{hour.day?.wendMPH?.split(' ')[0] !== 'undefined' ? hour.day?.wendMPH : 'NaN'} mph</span> */}
+                  <span className="text-sm">{hour.day?.wendMPH ? hour.day?.wendMPH : "NaN"} mph</span>
                 </div>
               </div>
             </SwiperSlide>
