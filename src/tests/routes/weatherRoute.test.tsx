@@ -1,8 +1,6 @@
 /**
  * @jest-environment node
  */
-import { GET } from "../../app/api/weather/route";  // Adjust path accordingly
-import { GetWeatherForecast } from "../../server/Get"; // Adjust path accordingly
 
 import { GET } from "../../app/api/weather/route";  // Adjust path accordingly
 import { GetWeatherForecast } from "../../server/Get"; // Adjust path accordingly
@@ -22,7 +20,7 @@ describe("Weather API Route", () => {
 
     // Create a mock request (could be simplified if necessary)
     const mockRequest = {
-      url: "http://localhost/api/weather?city=al mukalla",
+      url: "http://localhost:3001/api/weather?city=al mukalla",
       method: "GET",
       headers: new Headers(),
     };
@@ -54,7 +52,7 @@ describe("Weather API Route", () => {
 
     // Create a mock request
     const mockRequest = {
-      url: "http://localhost/api/weather?city=al mukalla",
+      url: "http://localhost:3001/api/weather?city=al mukalla",
       method: "GET",
       headers: new Headers(),
     };
