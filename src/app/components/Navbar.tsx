@@ -1,6 +1,6 @@
 export default function Navbar() {
   return (
-    <div className="fixed top-0 w-full bg-blue-400">
+    <div className="mb-4 w-full bg-blue-400 justify-center">
       <section>
         <nav>
           <div>

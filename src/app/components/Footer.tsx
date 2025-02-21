@@ -1,6 +1,6 @@
 export default function Footer() {
   return (
-    <div className="fixed bottom-0 w-full bg-blue-400">
+    <div className="w-full bg-blue-400 mt-4 justify-center">
       <section>
         <footer>
           <div>

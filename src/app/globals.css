@@ -20,8 +20,7 @@ html{
 /* Center container and ensure responsive width */
 .my-container {
   @apply flex flex-col items-center justify-self-center;
-  max-width: 1200px;
-  width: 90vw; /* Use viewport width */
+  width: 100%; /* Use viewport width */
 }
 
 /* Ensure section is centered and responsive */
@@ -29,12 +28,12 @@ section {
   @apply flex items-center justify-center p-2;
   max-width: 1200px;
   min-width: 380px;
-  width: 50vw;
+  width: 60vw;
 }
 
 /* Ensure divs are flex-based for centering */
 div {
-  @apply flex items-center justify-center;
+  @apply flex items-center;
 }
 
 /* Typography */

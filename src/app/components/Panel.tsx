@@ -39,7 +39,7 @@ export default function Panel() {
     fetchWeather();
   }, [debouncedSearch]);
   return (
-    <div className="flex flex-col w-full mt-12">
+    <div className="flex flex-col w-full mt-12 shadow-2xl">
       <div className="bg-gray-500 w-full rounded-t-xl">
         <input
           placeholder="Enter your city..."
@@ -51,7 +51,7 @@ export default function Panel() {
         />
       </div>
       {error ? (
-        <div className="w-full bg-red-500 rounded-b-xl p-5">
+        <div className="w-full text-white bg-red-500 rounded-b-xl p-5">
           <h1>{error}</h1>
         </div>
       ) : weather ? (

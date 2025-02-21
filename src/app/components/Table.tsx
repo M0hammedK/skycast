@@ -69,27 +69,32 @@ export default function Table({ Heads }: Props) {
       // Loading state
       return (
         <div className="w-full bg-yellow-200 rounded-b-xl p-5">
-          <h1>Loading Forecast Data...</h1>
+          <h1 className="w-full text-center">Loading Forecast Data...</h1>
         </div>
       );
     }
 
     return (
       <div>
-        <section className="flex flex-col projects section light-background">
+        <section className="flex flex-col section light-background">
           <div className="container">
             <Swiper
-              slidesPerView={2}
-              spaceBetween={16}
+              slidesPerView={1}
               loop={false}
               centeredSlides={true}
               initialSlide={0}
+              breakpoints={{
+                420: { slidesPerView: 1 },
+                850: { slidesPerView: 1.5 },
+                1200: { slidesPerView: 2 },
+                1450: { slidesPerView: 3 },
+              }}
               modules={[Mousewheel, Keyboard, FreeMode, Navigation]}
               mousewheel={true}
               navigation={true}
               freeMode={true}
               keyboard={true}
-              className="!pb-14 bg-blue-200"
+              className="shadow-xl bg-blue-50"
             >
               {forecast.hour.map((data: ForecastHourSchema) => (
                 <SwiperSlide
@@ -109,7 +114,6 @@ export default function Table({ Heads }: Props) {
                       <h3>درجة الحرارة ℃{data.day?.tempC}</h3>
                       <h3>تشعر كأنها ℃{data.day?.feelsLikeC}</h3>
                       <h3>السحاب {data.day?.cloud}</h3>
-                      <p>آخر تحديث: {data.day?.lastUpdated}</p>
                     </div>
                   </div>
                 </SwiperSlide>
@@ -117,15 +121,14 @@ export default function Table({ Heads }: Props) {
             </Swiper>
           </div>
         </section>
-        {/* <!-- /projects Section --> */}
       </div>
     );
   };
 
   return (
-    <div>
+    <div className="w-full">
       {error ? (
-        <div className="w-full bg-red-500 text-white rounded-xl p-5">
+        <div className="w-full bg-red-500 text-white rounded-b-xl p-5">
           <h1>{error}</h1>
         </div>
       ) : (

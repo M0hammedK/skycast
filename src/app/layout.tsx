@@ -21,7 +21,7 @@ export default function RootLayout({
     <html lang="en">
       <body className={"font-playfair antialiased my-container"}>
         <Navbar />
-        <CityProvider><div className="mt-12">{children}</div></CityProvider>
+        <CityProvider>{children}</CityProvider>
         <Footer />
       </body>
     </html>
