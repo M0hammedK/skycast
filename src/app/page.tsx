@@ -6,16 +6,13 @@ import ForecastSchema from "../models/Forecast";
 export default async function Home() {
   return (
     <section className="flex flex-col">
-      <div>
+      <div className="mb-10">
         <h1>welcome to SkyCast page</h1>
       </div>
       <Panel />
-      <div className="flex flex-col mt-8 w-full">
-        <h2 className="text-2xl bg-gray-500 w-full text-center rounded-t-xl p-2">The Day's Forecast</h2>
-        <Table Heads={['name', 'region', 'country','localtime',
-          'lastUpdated','condition_text','condition_icon',
-          'wend_mph','cloud','humidity','heatindex_c','heatindex_f',
-          'feelslike_c','feelslike_f']}  />
+      <div className="flex flex-col mt-8 w-full bg-white shadow-xl rounded-b-xl">
+        <h1 className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-xl p-4 text-center text-white">24-Hour Forecast</h1>
+        <Table  />
       </div>
     </section>
   );

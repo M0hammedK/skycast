@@ -1,13 +1,12 @@
+// app/components/Navbar.tsx
 export default function Navbar() {
   return (
-    <div className="mb-4 w-full bg-blue-400 justify-center">
-      <section>
-        <nav>
-          <div>
-            <h1>SkyCast</h1>
-          </div>
-        </nav>
-      </section>
-    </div>
+    <nav className="bg-gradient-to-r from-blue-600 to-indigo-600 shadow-lg">
+      <div className="container mx-auto px-4 py-4">
+        <h1 className="text-2xl font-bold text-white text-center">
+          🌤️ SkyCast
+        </h1>
+      </div>
+    </nav>
   );
 }
