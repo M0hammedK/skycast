@@ -39,7 +39,7 @@ export default function Table({ days }: Props) {
           )}&days=${encodeURIComponent(days)}`
         );
         if (!res.data) {
-          setError(`No city found called "${debouncedCity}".`);
+          setError(`لا توجد مدينة بأسم  "${debouncedCity}".`);
           setForecasts(null);
           return;
         }
@@ -49,7 +49,7 @@ export default function Table({ days }: Props) {
         setForecasts(data);
         setError(null);
       } catch (err) {
-        setError(`No city found called "${debouncedCity}".`);
+        setError(`لا توجد مدينة بأسم "${debouncedCity}".`);
         setForecasts(null);
       }
     };
@@ -93,7 +93,7 @@ export default function Table({ days }: Props) {
                     <div className="flex items-center space-x-1 mt-1">
                       <WindIcon className="w-4 h-4 text-gray-500" />
                       <span className="text-sm">
-                        {hour.hour?.windMPH ? hour.hour?.windMPH : "NaN"} mph
+                        {hour.hour?.windMPH ? hour.hour?.windMPH +"ميل \\ساعة" : "غير معلومة"} 
                       </span>
                     </div>
                   </div>
@@ -112,18 +112,18 @@ export default function Table({ days }: Props) {
                     />
                     <h3>{forecast.day?.conditionText}</h3>
                     <p className="text-lg font-semibold">
-                      min {forecast.day?.minTempC}°C
+                    °C اقل درجة {forecast.day?.minTempC}
                     </p>
                     <p className="text-lg font-semibold">
-                      max {forecast.day?.maxTempC}°C
+                    °C أعلى درجة {forecast.day?.maxTempC}
                     </p>
                     <div className="flex items-center space-x-1 mt-1">
                       <WindIcon className="w-4 h-4 text-gray-500" />
                       <span className="text-sm">
                         {forecast.day?.maxWind_MPH
                           ? forecast.day?.maxWind_MPH
-                          : "NaN"}{" "}
-                        mph
+                          : "لايوجد"}{" "}
+                        ميل\ساعة
                       </span>
                     </div>
                   </div>

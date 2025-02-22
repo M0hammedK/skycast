@@ -28,7 +28,7 @@ export default function Panel() {
         await axios(`/api/weather?city=${encodeURIComponent(city)}`)
           .then((res) => {
             if (!res.data) {
-              setError("there's no city called " + city);
+              setError("لاتوجد مدينة بأسم " + city);
             }
             const data: WeatherSchema = WeatherUtils.WeatherToModel(res);
             setWeather(data);
@@ -38,7 +38,7 @@ export default function Panel() {
             throw err;
           });
       } catch (error) {
-        setError("there's no city called " + city);
+        setError("لاتوجد مدينة بأسم " + city);
       }
     };
 
@@ -86,22 +86,22 @@ export default function Panel() {
             </h1>
             <WeatherDetail
               icon={<ThermometerIcon />}
-              label="Feels like"
+              label="كأنه"
               value={`${weather.state?.feelsLikeC}°C`}
             />
             <WeatherDetail
               icon={<HumidityIcon />}
-              label="Humidity"
+              label="الرطوبة"
               value={`${weather.state?.humidity}%`}
             />
             <WeatherDetail
               icon={<WindIcon />}
-              label="Wind"
-              value={`${weather.state?.windMPH} mph`}
+              label="الرياح"
+              value={`${weather.state?.windMPH} ميل\\ساعة`}
             />
             <WeatherDetail
               icon={<CloudIcon />}
-              label="Cloud"
+              label="السحب"
               value={`${weather.state?.cloud}%`}
             />
           </div>
@@ -129,8 +129,8 @@ function WeatherDetail({
       <div className="text-blue-600">{icon}</div>
       <div>
         <p className="text-sm text-gray-600">{label}</p>
-        <p className="font-semibold">
-          &nbsp; {value.split(" ")[0] !== "undefined" ? value : "NaN"}
+        <p className="font-bold text-lg">
+          &nbsp; {value.split(" ")[0] !== "undefined" ? value : "لايوجد"}
         </p>
       </div>
     </div>
