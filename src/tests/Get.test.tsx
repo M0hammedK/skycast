@@ -6,7 +6,7 @@ jest.mock("axios");
 describe("Weather API functions", () => {
   const mockWeatherData = {
     location: {
-      name: "Al Mukalla",
+      name: "المكلا اليمن",
       region: "Hadramawt",
       country: "Yemen",
     },
@@ -35,13 +35,13 @@ describe("Weather API functions", () => {
   it("should fetch current weather data successfully", async () => {
     (axios.get as jest.Mock).mockResolvedValueOnce({ data: mockWeatherData });
 
-    const data = await GetWeatherCurrent("Al Mukalla");
+    const data = await GetWeatherCurrent("المكلا اليمن");
 
     expect(axios.get).toHaveBeenCalledWith(`${process.env.NEXT_URL_API_URL}/current.json`, {
       method: "GET",
       params: {
         key: `${process.env.WEATHER_SERVER_KEY}`,
-        q: "Al Mukalla",
+        q: "المكلا اليمن",
         lang: "ar",
       },
     });
@@ -51,7 +51,7 @@ describe("Weather API functions", () => {
   it("should return null if there is an error in GetWeatherCurrent", async () => {
     (axios.get as jest.Mock).mockRejectedValueOnce(new Error("Network error"));
 
-    const data = await GetWeatherCurrent("Al Mukalla");
+    const data = await GetWeatherCurrent("المكلا اليمن");
 
     expect(data).toBeNull();
   });
@@ -59,13 +59,13 @@ describe("Weather API functions", () => {
   it("should fetch weather forecast successfully", async () => {
     (axios.get as jest.Mock).mockResolvedValueOnce({ data: mockWeatherData });
 
-    const forecast = await GetWeatherForecast("Al Mukalla");
+    const forecast = await GetWeatherForecast("المكلا اليمن");
 
     expect(axios.get).toHaveBeenCalledWith(`${process.env.NEXT_URL_API_URL}/forecast.json`, {
       method: "GET",
       params: {
         key: `${process.env.WEATHER_SERVER_KEY}`,
-        q: "Al Mukalla",
+        q: "المكلا اليمن",
         lang: "ar",
       },
     });

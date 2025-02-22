@@ -4,7 +4,7 @@ import { NextResponse } from "next/server";
 
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
-  const city = searchParams.get("city") || "al mukalla";
+  const city = searchParams.get("city") || "المكلا اليمن";
   try {
     const weather = await GetWeatherCurrent(city);
     return NextResponse.json(weather);

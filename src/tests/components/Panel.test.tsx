@@ -18,8 +18,8 @@ describe("Panel Component", () => {
     // Check if the input field exists
     expect(screen.getByPlaceholderText("Search city...")).toBeInTheDocument();
 
-    // Check if the default city "Al Mukalla" is in the input field
-    expect(screen.getByDisplayValue("Al Mukalla")).toBeInTheDocument();
+    // Check if the default city "المكلا اليمن" is in the input field
+    expect(screen.getByDisplayValue("المكلا اليمن")).toBeInTheDocument();
   });
 
   it("updates the city when typing", () => {

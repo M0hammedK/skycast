@@ -16,7 +16,7 @@ export default function CityProvider({
 }: {
   children: React.ReactNode;
 }) {
-  const [city, setCity] = useState("Al Mukalla");
+  const [city, setCity] = useState("المكلا اليمن");
   return (
     <cityContaxt.Provider value={{ city, setCity }}>
       {children}
