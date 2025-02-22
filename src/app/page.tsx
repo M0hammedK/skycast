@@ -7,7 +7,7 @@ export default async function Home() {
   return (
     <section className="flex flex-col">
       <div className="mb-10">
-        <h1>welcome to SkyCast page</h1>
+        <h1>Welcome to SkyCast page</h1>
       </div>
       <Panel />
       <div className="flex flex-col mt-8 w-full bg-white shadow-xl rounded-b-xl">

@@ -4,9 +4,7 @@ import CityProvider from "../../app/components/GlobalStates/CityContext";
 import axios from "axios";
 import "@testing-library/jest-dom";
 
-// Mock axios to avoid actual API calls
 jest.mock("axios");
-// Instead of mocking axios.get, we now treat axios as a function.
 const mockedAxios = axios as jest.MockedFunction<typeof axios>;
 
 describe("Panel Component", () => {
@@ -51,7 +49,6 @@ describe("Panel Component", () => {
       },
     };
 
-    // Since Panel.tsx uses axios() shorthand, we mock axios directly:
     mockedAxios.mockResolvedValueOnce(mockWeatherData);
 
     render(
