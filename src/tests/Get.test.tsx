@@ -1,8 +1,6 @@
-// Import necessary modules
 import axios from "axios";
-import { GetWeatherCurrent, GetWeatherForecast } from "./Get"
+import { GetWeatherCurrent, GetWeatherForecast } from "../server/Get"
 
-// Mock axios
 jest.mock("axios");
 
 describe("Weather API functions", () => {
@@ -31,17 +29,14 @@ describe("Weather API functions", () => {
   };
 
   afterEach(() => {
-    jest.clearAllMocks(); // Clear mocks between tests
+    jest.clearAllMocks(); 
   });
 
   it("should fetch current weather data successfully", async () => {
-    // Arrange: Mock axios to return mockWeatherData
     (axios.get as jest.Mock).mockResolvedValueOnce({ data: mockWeatherData });
 
-    // Act: Call the function
     const data = await GetWeatherCurrent("Al Mukalla");
 
-    // Assert: Check the returned data
     expect(axios.get).toHaveBeenCalledWith(`${process.env.NEXT_URL_API_URL}/current.json`, {
       method: "GET",
       params: {
@@ -54,24 +49,18 @@ describe("Weather API functions", () => {
   });
 
   it("should return null if there is an error in GetWeatherCurrent", async () => {
-    // Arrange: Mock axios to reject with an error
     (axios.get as jest.Mock).mockRejectedValueOnce(new Error("Network error"));
 
-    // Act: Call the function
     const data = await GetWeatherCurrent("Al Mukalla");
 
-    // Assert: Check if the function returns null on error
     expect(data).toBeNull();
   });
 
   it("should fetch weather forecast successfully", async () => {
-    // Arrange: Mock axios to return mockWeatherData
     (axios.get as jest.Mock).mockResolvedValueOnce({ data: mockWeatherData });
 
-    // Act: Call the function
     const forecast = await GetWeatherForecast("Al Mukalla");
 
-    // Assert: Ensure axios was called with correct params
     expect(axios.get).toHaveBeenCalledWith(`${process.env.NEXT_URL_API_URL}/forecast.json`, {
       method: "GET",
       params: {
@@ -81,6 +70,5 @@ describe("Weather API functions", () => {
       },
     });
 
-    // Additional assertions can be added to ensure correct parsing
   });
 });
