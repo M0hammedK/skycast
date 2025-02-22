@@ -1,7 +1,7 @@
-class WeatherDaySchema {
+class WeatherStateSchema {
   public conditionText: string | undefined;
-  public conditionicon: string | undefined;
-  public wendMPH: string | undefined;
+  public conditionIcon: string | undefined;
+  public windMPH: string | undefined;
   public cloud: string | undefined;
   public humidity: string | undefined;
   public tempC: string | undefined;
@@ -11,4 +11,4 @@ class WeatherDaySchema {
   public lastUpdated: string | undefined;
 }
 
-export default WeatherDaySchema;
+export default WeatherStateSchema;

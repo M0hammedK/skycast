@@ -9,8 +9,8 @@ export async function GetWeatherCurrent(City: string): Promise<any> {
     .get(`${process.env.NEXT_URL_API_URL}/current.json`, {
       method: "GET",
       params: {
-        key: `${process.env.WEATHER_SERVER_KEY}`,
-        q: `${City}`,
+        key: process.env.WEATHER_SERVER_KEY,
+        q: City,
         lang: "ar",
       },
     })
@@ -24,15 +24,17 @@ export async function GetWeatherCurrent(City: string): Promise<any> {
 }
 
 export async function GetWeatherForecast(
-  City: string
+  City: string,
+  Days: string
 ): Promise<any> {
   let data;
   const res = await axios
     .get(`${process.env.NEXT_URL_API_URL}/forecast.json`, {
       method: "GET",
       params: {
-        key: `${process.env.WEATHER_SERVER_KEY}`,
-        q: `${City}`,
+        key: process.env.WEATHER_SERVER_KEY,
+        q: City,
+        days: Days,
         lang: "ar",
       },
     })

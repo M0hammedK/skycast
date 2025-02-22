@@ -5,8 +5,9 @@ import { NextResponse } from "next/server";
 export async function GET(req: Request) {
   const { searchParams } = new URL(req.url);
   const city = searchParams.get("city") || "al mukalla";
+  const days = searchParams.get("days");
   try {
-    const weather = await GetWeatherForecast(city);
+    const weather = await GetWeatherForecast(city, days!);
     return NextResponse.json(weather);
   } catch (error) {
     return NextResponse.error();

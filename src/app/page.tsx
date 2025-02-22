@@ -14,7 +14,13 @@ export default async function Home() {
         <h1 className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-xl p-4 text-center text-white">
           24-Hour Forecast
         </h1>
-        <Table />
+        <Table days="1"/>
+      </div>
+      <div className="flex flex-col mt-8 w-full bg-white shadow-xl rounded-b-xl">
+        <h1 className="w-full bg-gradient-to-r from-blue-500 to-indigo-500 rounded-t-xl p-4 text-center text-white">
+          7-Days Forecast
+        </h1>
+        <Table days="7"/>
       </div>
     </section>
   );

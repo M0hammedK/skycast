@@ -68,14 +68,16 @@ export default function Panel() {
           <div className="flex flex-col items-center">
             <h1>{weather.localtime?.split(" ")[1]}</h1>
             <Image
-              src={`http:${weather.day?.conditionicon}`}
-              alt={weather.day?.conditionText || "Weather condition"}
+              src={`http:${weather.state?.conditionIcon}`}
+              alt={weather.state?.conditionText || "Weather condition"}
               width={120}
               height={120}
               className="drop-shadow"
             />
-            <h1 className="text-4xl font-bold mt-2">{weather.day?.tempC}°C</h1>
-            <h3 className="text-gray-600">{weather.day?.conditionText}</h3>
+            <h1 className="text-4xl font-bold mt-2">
+              {weather.state?.tempC}°C
+            </h1>
+            <h3 className="text-gray-600">{weather.state?.conditionText}</h3>
           </div>
 
           <div className="grid grid-cols-2 gap-4">
@@ -85,22 +87,22 @@ export default function Panel() {
             <WeatherDetail
               icon={<ThermometerIcon />}
               label="Feels like"
-              value={`${weather.day?.feelsLikeC}°C`}
+              value={`${weather.state?.feelsLikeC}°C`}
             />
             <WeatherDetail
               icon={<HumidityIcon />}
               label="Humidity"
-              value={`${weather.day?.humidity}%`}
+              value={`${weather.state?.humidity}%`}
             />
             <WeatherDetail
               icon={<WindIcon />}
               label="Wind"
-              value={`${weather.day?.wendMPH} mph`}
+              value={`${weather.state?.windMPH} mph`}
             />
             <WeatherDetail
               icon={<CloudIcon />}
               label="Cloud"
-              value={`${weather.day?.cloud}%`}
+              value={`${weather.state?.cloud}%`}
             />
           </div>
         </div>

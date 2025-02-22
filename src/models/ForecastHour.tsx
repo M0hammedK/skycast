@@ -1,6 +1,6 @@
-import WeatherDaySchema from "./WeatherDay"
+import WeatherStateSchema from "./WeatherDay";
 
-class ForecastHourSchema{
-    public day: WeatherDaySchema | undefined
+class ForecastHourSchema {
+  public hour: WeatherStateSchema | undefined;
 }
-export default ForecastHourSchema
+export default ForecastHourSchema;
